@@ -33,7 +33,6 @@ public class Robot extends TimedRobot {
     private final SpeedController talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
     private final Joystick m_stick = new Joystick(0);
-    private final Timer m_timer = new Timer();
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -43,7 +42,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         talonLeftFollower.follow(talonLeftLeader);
         talonRightFollower.follow(talonRightLeader);
-    }
+        
+        }
 
     /** This function is run once each time the robot enters autonomous mode. */
     @Override
@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+        
     }
 
     /** This function is called once each time the robot enters test mode. */
