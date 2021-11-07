@@ -22,9 +22,12 @@ import jdk.nashorn.internal.objects.annotations.SpecializedFunction;
  * directory.
  */
 public class Robot extends TimedRobot {
-    private final SpeedController left = new WPI_TalonSRX(0);
-    private final SpeedController right = new WPI_TalonSRX(1);
-    private final DifferentialDrive m_robotDrive = new DifferentialDrive(left, right);
+    private final static int LEFT_TALON_ID = 0;
+    private final static int RIGHT_TALON_ID = 1;
+
+    private final SpeedController talonLeft = new WPI_TalonSRX(LEFT_TALON_ID);
+    private final SpeedController talonRight = new WPI_TalonSRX(RIGHT_TALON_ID);
+    private final DifferentialDrive m_robotDrive = new DifferentialDrive(talonLeft, talonRight);
     private final Joystick m_stick = new Joystick(0);
     private final Timer m_timer = new Timer();
 
@@ -39,19 +42,11 @@ public class Robot extends TimedRobot {
     /** This function is run once each time the robot enters autonomous mode. */
     @Override
     public void autonomousInit() {
-        m_timer.reset();
-        m_timer.start();
     }
 
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        // Drive for 2 seconds
-        if (m_timer.get() < 2.0) {
-            m_robotDrive.arcadeDrive(0.5, 0.0); // drive forwards half speed
-        } else {
-            m_robotDrive.stopMotor(); // stop robot
-        }
     }
 
     /**
