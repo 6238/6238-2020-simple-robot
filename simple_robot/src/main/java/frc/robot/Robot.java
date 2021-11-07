@@ -4,11 +4,15 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMSparkMax;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import jdk.internal.org.objectweb.asm.commons.RemappingMethodAdapter;
+import jdk.nashorn.internal.objects.annotations.SpecializedFunction;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,7 +22,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * directory.
  */
 public class Robot extends TimedRobot {
-    private final DifferentialDrive m_robotDrive = new DifferentialDrive(new PWMSparkMax(0), new PWMSparkMax(1));
+    private final SpeedController left = new WPI_TalonSRX(0);
+    private final SpeedController right = new WPI_TalonSRX(1);
+    private final DifferentialDrive m_robotDrive = new DifferentialDrive(left, right);
     private final Joystick m_stick = new Joystick(0);
     private final Timer m_timer = new Timer();
 
