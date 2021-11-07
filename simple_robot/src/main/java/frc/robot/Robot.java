@@ -9,10 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import jdk.internal.org.objectweb.asm.commons.RemappingMethodAdapter;
-import jdk.nashorn.internal.objects.annotations.SpecializedFunction;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,10 +24,10 @@ public class Robot extends TimedRobot {
     private final static int RIGHT_LEADER_ID = 2;
     private final static int RIGHT_FOLLOWER_ID = 3;
 
-    private final SpeedController talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
-    private final SpeedController talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
-    private final SpeedController talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
-    private final SpeedController talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
+    private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
+    private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
+    private final WPI_TalonSRX talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
+    private final WPI_TalonSRX talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
     private final Joystick m_stick = new Joystick(0);
 
