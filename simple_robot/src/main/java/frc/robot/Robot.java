@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * directory.
  */
 public class Robot extends TimedRobot {
-    private final static int LEFT_LEADER_ID = 0;
-    private final static int LEFT_FOLLOWER_ID = 1;
-    private final static int RIGHT_LEADER_ID = 2;
-    private final static int RIGHT_FOLLOWER_ID = 3;
+    private final static int LEFT_LEADER_ID = 11;
+    private final static int LEFT_FOLLOWER_ID = 13;
+    private final static int RIGHT_LEADER_ID = 10;
+    private final static int RIGHT_FOLLOWER_ID = 12;
 
     private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
     private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
@@ -40,7 +40,9 @@ public class Robot extends TimedRobot {
         talonLeftFollower.follow(talonLeftLeader);
         talonRightFollower.follow(talonRightLeader);
         
-        }
+        talonLeftFollower.setInverted(true);
+        talonRightFollower.setInverted(true); 
+    }
 
     /** This function is run once each time the robot enters autonomous mode. */
     @Override
@@ -63,7 +65,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
-        
+
+        System.out.println("Testing all motors.");
     }
 
     /** This function is called once each time the robot enters test mode. */
