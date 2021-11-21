@@ -7,7 +7,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
-
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -19,29 +19,21 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * directory.
  */
 public class Robot extends TimedRobot {
-    private final static int LEFT_LEADER_ID = 11;
-    private final static int LEFT_FOLLOWER_ID = 13;
-    private final static int RIGHT_LEADER_ID = 10;
-    private final static int RIGHT_FOLLOWER_ID = 12;
+    private final static int LEFT_TALON_1_ID = 11;
+    private final static int LEFT_TALON_2_ID = 13;
+    private final static int RIGHT_TALON_1_ID = 10;
+    private final static int RIGHT_TALON_2_ID = 12;
 
-<<<<<<< HEAD
-    private final WPI_TalonSRX talonLeft1 = new WPI_TalonSRX(LEFT_LEADER_ID);
-    private final WPI_TalonSRX talonLeft2 = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
-    private final WPI_TalonSRX talonRight1 = new WPI_TalonSRX(RIGHT_LEADER_ID);
-    private final WPI_TalonSRX talonRight2 = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
+    private final WPI_TalonSRX talonLeft1 = new WPI_TalonSRX(LEFT_TALON_1_ID);
+    private final WPI_TalonSRX talonLeft2 = new WPI_TalonSRX(LEFT_TALON_2_ID);
+    private final WPI_TalonSRX talonRight1 = new WPI_TalonSRX(RIGHT_TALON_1_ID);
+    private final WPI_TalonSRX talonRight2 = new WPI_TalonSRX(RIGHT_TALON_2_ID);
 
-    private final SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(talonLeft1, talonLeft2);
-    private 
-    private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeft, talonRightLeader);
+    private final SpeedControllerGroup leftDriveMotors = new SpeedControllerGroup(talonLeft1, talonLeft2);
+    private final SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(talonRight1, talonRight2);
+
+    private final DifferentialDrive robotDrive = new DifferentialDrive(leftDriveMotors, rightDriveMotors);
     private final Joystick stick = new Joystick(0);
-=======
-    private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
-    private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
-    private final WPI_TalonSRX talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
-    private final WPI_TalonSRX talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
-    private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
-    private final Joystick m_stick = new Joystick(0);
->>>>>>> main
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -49,22 +41,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-
-        talonLeftFollower.follow(talonLeftLeader);
-        talonLeftFollower.setInverted(true);
-        talonRightFollower.follow(talonRightLeader);
-<<<<<<< HEAD
-        talonRightFollower.setInverted(true);
-
-    
-        
-        }
-=======
-
-        talonLeftFollower.setInverted(true);
-        // talonRightFollower.setInverted(true);
     }
->>>>>>> main
 
     /** This function is run once each time the robot enters autonomous mode. */
     @Override
@@ -86,20 +63,9 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
-<<<<<<< HEAD
-        //robotDrive.arcadeDrive(stick.getY(), stick.getX());
-        
-        talonLeftLeader.set(0.25);
-        talonRightLeader.set(0.25);
-
-        System.out.println("This is printing"); 
-
-        
-=======
-        robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
+        robotDrive.arcadeDrive(stick.getX(), stick.getY());
 
         System.out.println("Testing teleoperated mode.");
->>>>>>> main
     }
 
     /** This function is called once each time the robot enters test mode. */
