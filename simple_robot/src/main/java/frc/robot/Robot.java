@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
     private final static int RIGHT_LEADER_ID = 10;
     private final static int RIGHT_FOLLOWER_ID = 12;
 
+<<<<<<< HEAD
     private final WPI_TalonSRX talonLeft1 = new WPI_TalonSRX(LEFT_LEADER_ID);
     private final WPI_TalonSRX talonLeft2 = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
     private final WPI_TalonSRX talonRight1 = new WPI_TalonSRX(RIGHT_LEADER_ID);
@@ -33,6 +34,14 @@ public class Robot extends TimedRobot {
     private 
     private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeft, talonRightLeader);
     private final Joystick stick = new Joystick(0);
+=======
+    private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
+    private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
+    private final WPI_TalonSRX talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
+    private final WPI_TalonSRX talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
+    private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
+    private final Joystick m_stick = new Joystick(0);
+>>>>>>> main
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -44,11 +53,18 @@ public class Robot extends TimedRobot {
         talonLeftFollower.follow(talonLeftLeader);
         talonLeftFollower.setInverted(true);
         talonRightFollower.follow(talonRightLeader);
+<<<<<<< HEAD
         talonRightFollower.setInverted(true);
 
     
         
         }
+=======
+
+        talonLeftFollower.setInverted(true);
+        // talonRightFollower.setInverted(true);
+    }
+>>>>>>> main
 
     /** This function is run once each time the robot enters autonomous mode. */
     @Override
@@ -70,6 +86,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
+<<<<<<< HEAD
         //robotDrive.arcadeDrive(stick.getY(), stick.getX());
         
         talonLeftLeader.set(0.25);
@@ -78,6 +95,11 @@ public class Robot extends TimedRobot {
         System.out.println("This is printing"); 
 
         
+=======
+        robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
+
+        System.out.println("Testing teleoperated mode.");
+>>>>>>> main
     }
 
     /** This function is called once each time the robot enters test mode. */
