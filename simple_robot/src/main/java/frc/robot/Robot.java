@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
         talonRightFollower.follow(talonRightLeader);
         
         talonLeftFollower.setInverted(true);
-        talonRightFollower.setInverted(true); 
+        // talonRightFollower.setInverted(true); 
     }
 
     /** This function is run once each time the robot enters autonomous mode. */
@@ -64,9 +64,9 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
-        m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+        m_robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
 
-        System.out.println("Testing all motors.");
+        System.out.println("Testing teleoperated mode.");
     }
 
     /** This function is called once each time the robot enters test mode. */
