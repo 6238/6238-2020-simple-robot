@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
     private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
     private final WPI_TalonSRX talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
     private final WPI_TalonSRX talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
-    private final DifferentialDrive m_robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
+    private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
     private final Joystick m_stick = new Joystick(0);
 
     /**
@@ -39,9 +39,9 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         talonLeftFollower.follow(talonLeftLeader);
         talonRightFollower.follow(talonRightLeader);
-        
+
         talonLeftFollower.setInverted(true);
-        // talonRightFollower.setInverted(true); 
+        // talonRightFollower.setInverted(true);
     }
 
     /** This function is run once each time the robot enters autonomous mode. */
@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
-        m_robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
+        robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
 
         System.out.println("Testing teleoperated mode.");
     }
