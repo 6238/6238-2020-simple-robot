@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Robot extends TimedRobot {
     private final static int LEFT_TALON_1_ID = 11;
-    private final static int LEFT_TALON_2_ID = 13;
+    private final static int LEFT_TALON_2_ID = 12;
     private final static int RIGHT_TALON_1_ID = 10;
-    private final static int RIGHT_TALON_2_ID = 12;
+    private final static int RIGHT_TALON_2_ID = 13;
 
     private final WPI_TalonSRX talonLeft1 = new WPI_TalonSRX(LEFT_TALON_1_ID);
     private final WPI_TalonSRX talonLeft2 = new WPI_TalonSRX(LEFT_TALON_2_ID);
@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
-        robotDrive.arcadeDrive(stick.getX(), stick.getY());
+        robotDrive.arcadeDrive(stick.getY(), stick.getX());
 
         System.out.println("Testing teleoperated mode.");
     }
