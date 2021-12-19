@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -19,9 +21,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * directory.
  */
 public class Robot extends TimedRobot {
-    private final static int LEFT_LEADER_ID = 11;
+    private final static int LEFT_LEADER_ID = 10;
     private final static int LEFT_FOLLOWER_ID = 13;
-    private final static int RIGHT_LEADER_ID = 10;
+    private final static int RIGHT_LEADER_ID = 11;
     private final static int RIGHT_FOLLOWER_ID = 12;
 
     private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
@@ -31,51 +33,40 @@ public class Robot extends TimedRobot {
     private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
     private final Joystick m_stick = new Joystick(0);
 
-    /**
-     * This function is run when the robot is first started up and should be used
-     * for any initialization code.
-     */
+    private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(0, 1);
+
+    private static final int kDoubleSolenoidForward = 3;
+    private static final int kDoubleSolenoidReverse = 4;
+
     @Override
     public void robotInit() {
         talonLeftFollower.follow(talonLeftLeader);
         talonRightFollower.follow(talonRightLeader);
-
-        talonLeftFollower.setInverted(true);
-        // talonRightFollower.setInverted(true);
+        talonRightFollower.setInverted(true);
     }
 
-    /** This function is run once each time the robot enters autonomous mode. */
     @Override
-    public void autonomousInit() {
-    }
-
-    /** This function is called periodically during autonomous. */
+    public void autonomousInit() {}
     @Override
-    public void autonomousPeriodic() {
-    }
-
-    /**
-     * This function is called once each time the robot enters teleoperated mode.
-     */
+    public void autonomousPeriodic() {}
     @Override
-    public void teleopInit() {
-    }
+    public void teleopInit() {}
 
-    /** This function is called periodically during teleoperated mode. */
     @Override
     public void teleopPeriodic() {
         robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
 
-        System.out.println("Testing teleoperated mode.");
+        System.out.println("Testing pneumatics system.");
+
+        if (m_stick.getRawButton(kDoubleSolenoidForward)) {
+            doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+        } else if (m_stick.getRawButton(kDoubleSolenoidReverse)) {
+            doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+        }
     }
 
-    /** This function is called once each time the robot enters test mode. */
     @Override
-    public void testInit() {
-    }
-
-    /** This function is called periodically during test mode. */
+    public void testInit() {}
     @Override
-    public void testPeriodic() {
-    }
+    public void testPeriodic() {}
 }
