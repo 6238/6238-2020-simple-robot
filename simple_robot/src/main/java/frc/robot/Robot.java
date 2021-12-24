@@ -54,10 +54,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-        robotDrive.arcadeDrive(m_stick.getX(), m_stick.getY());
-
-        System.out.println("Testing pneumatics system.");
-
+        robotDrive.arcadeDrive(m_stick.getX(), -m_stick.getY());
+        System.out.println("Testing reverse direction forward speed.");
         if (m_stick.getRawButton(kDoubleSolenoidForward)) {
             doubleSolenoid.set(DoubleSolenoid.Value.kForward);
         } else if (m_stick.getRawButton(kDoubleSolenoidReverse)) {
