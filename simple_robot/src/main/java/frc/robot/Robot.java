@@ -26,10 +26,14 @@ public class Robot extends TimedRobot {
     private final static int RIGHT_LEADER_ID = 11;
     private final static int RIGHT_FOLLOWER_ID = 12;
 
+    private final static int INTAKE_ID = 1234;
+
     private final WPI_TalonSRX talonLeftLeader = new WPI_TalonSRX(LEFT_LEADER_ID);
     private final WPI_TalonSRX talonLeftFollower = new WPI_TalonSRX(LEFT_FOLLOWER_ID);
     private final WPI_TalonSRX talonRightLeader = new WPI_TalonSRX(RIGHT_LEADER_ID);
     private final WPI_TalonSRX talonRightFollower = new WPI_TalonSRX(RIGHT_FOLLOWER_ID);
+    private final WPI_TalonSRX intakeTalon = new WPI_TalonSRX(INTAKE_ID);
+    
     private final DifferentialDrive robotDrive = new DifferentialDrive(talonLeftLeader, talonRightLeader);
     private final Joystick m_stick = new Joystick(0);
 
@@ -54,6 +58,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
+        intakeTalon.set(1);
+
         robotDrive.arcadeDrive(m_stick.getX(), -m_stick.getY());
         System.out.println("Testing reverse direction forward speed.");
         if (m_stick.getRawButton(kDoubleSolenoidForward)) {
